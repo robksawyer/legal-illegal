@@ -1,7 +1,7 @@
 {
   "name": "hubot-illegal-legal",
   "description": "Punch in a word or phase and this brain will tell you whether or not it's legal or illegal.",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "author": "robksawyer <robksawyer@gmail.com>",
   "license": "MIT",
   "keywords": [
