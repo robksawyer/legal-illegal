@@ -28,6 +28,6 @@ module.exports = (robot) ->
   robot.respond /hello/, (msg) ->
     msg.reply "Hi! Don't believe anything that I say. None of this can be used against you in a court of law."
 
-  robot.hear /is it i{0,1}l+egal to (.*$)|is (.*) i{0,1}l+egal/igm, (msg) ->
+  robot.hear /is it i{0,1}l+egal to (.*$)|is (.*) i{0,1}l+egal/i, (msg) ->
     msg.send msg.match[1]
     msg.send searchSong(msg.match[1])
