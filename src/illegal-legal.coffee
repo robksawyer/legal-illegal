@@ -59,6 +59,7 @@ searchSong = (msg, val) ->
           legal_resp
         else 
           illegal_resp
+      return
   return
 
 
