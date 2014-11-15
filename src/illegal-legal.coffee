@@ -39,5 +39,6 @@ module.exports = (robot) ->
 
   robot.hear /is it i{0,1}l+egal to (.*$)|is (.*) i{0,1}l+egal/im, (msg) ->
     msg.send msg.match[1]
-    msg.send searchSong(msg.match[1])
+    result = searchSong(msg.match[1])
+    msg.send result
     return
