@@ -66,5 +66,5 @@ module.exports = (robot) ->
     return
 
   robot.hear /is it i{0,1}l+egal to (.*$)|is (.*) i{0,1}l+egal/im, (msg) ->
-    searchSong(msg, msg.match[1].toString)
+    searchSong(msg, msg.match[1])
     return
