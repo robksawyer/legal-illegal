@@ -38,7 +38,7 @@ illegal_resp = [
 # Using Math.round() will give you a non-uniform distribution!
 #
 getRandomInt = (min, max) ->
-    return Math.floor(Math.random() * (max - min + 1)) + min
+  return Math.floor(Math.random() * (max - min + 1)) + min
 
 getLegalRepsonse = () ->
   return legal_resp[getRandomInt(0,legal_resp.length-1)]
@@ -50,17 +50,29 @@ getIllegalRepsonse = () ->
 searchSong = (msg, val) ->
   rapgen.searchSong val, "rap", (err, songs) ->
     if err
-      msg.send getLegalRepsonse()
+      val = getLegalRepsonse()
+      msg.send val
     else
       msg.send songs[0].link
       rapgen.searchLyricsAndExplanations songs[0].link, "rap", (msg) ->
         if err
-          msg.send getLegalRepsonse()
+          val = getLegalRepsonse()
+          msg.send val
         else 
-          msg.send getIllegalRepsonse()
+          val = getIllegalRepsonse()
+          msg.send val
 
 
 module.exports = (robot) ->
+
+  robot.respond /legal/, (msg) ->
+    val = getLegalRepsonse()
+    msg.reply val
+
+  robot.respond /illegal/, (msg) ->
+    val = getIllegalRepsonse()
+    msg.reply val
+
   robot.respond /hello/, (msg) ->
     msg.reply "Hi! Don't believe anything that I say. None of this can be used against you in a court of law."
 
