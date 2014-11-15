@@ -54,7 +54,7 @@ searchSong = (msg, val) ->
       msg.send val
     else
       msg.send songs[0].link
-      rapgen.searchLyricsAndExplanations songs[0].link, "rap", (msg) ->
+      rapgen.searchLyricsAndExplanations songs[0].link, "rap", (msg, getLegalRepsonse, getIllegalRepsonse) ->
         if err
           val = getLegalRepsonse()
           msg.send val
@@ -67,22 +67,14 @@ module.exports = (robot) ->
 
   robot.respond /legal/, (msg) ->
     val = getLegalRepsonse()
-    msg.reply val
+    msg.send val
 
   robot.respond /illegal/, (msg) ->
     val = getIllegalRepsonse()
-    msg.reply val
+    msg.send val
 
   robot.respond /hello/, (msg) ->
     msg.reply "Hi! Don't believe anything that I say. None of this can be used against you in a court of law."
-
-  robot.hear /is (weed|marajuana) legal/im, (msg) ->
-    msg.send "Yep, sure is. But don't get high on your own supply."
-    return
-
-  robot.hear /is (weed|marajuana) illegal/im, (msg) ->
-    msg.send "Nope, smoke up."
-    return
 
   robot.hear /is it i{0,1}l+egal to (.*$)|is (.*) i{0,1}l+egal/im, (msg) ->
     searchSong(msg, msg.match[1])
