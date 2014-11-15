@@ -51,20 +51,13 @@ searchSong = (msg, val) ->
     if err
       msg.send getLegalRepsonse()
     else
-      result = rapgen.searchLyricsAndExplanations songs[0].link, "rap", (msg) ->
+      illegal_resp = getIllegalRepsonse()
+      legal_resp = getLegalRepsonse()
+      rapgen.searchLyricsAndExplanations songs[0].link, "rap", (msg, legal_resp, illegal_resp) ->
         if err
-          msg.send "Did not find result"
-          false
+          msg.send legal_resp
         else 
-          msg.send "Found result"
-          true
-      
-      msg.send result
-      
-      if result
-        msg.send getIllegalRepsonse()
-      else 
-        msg.send getLegalRepsonse()
+          msg.send illegal_resp
 
 
 
