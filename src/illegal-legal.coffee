@@ -18,13 +18,42 @@
 
 rapgen = require("rapgenius-js");
 
+legal_resp = [
+  "I'm just going to go ahead and guess that this is probably legal."
+  "Yeah, probably legal."
+  "Um, duh. Yeah it's legal."
+  "Yes this is legal."
+]
+
+illegal_resp = [
+  "No you idiot, it's not legal."
+  "Really, you even have to ask?"
+  "Nope, totally not legal."
+  "No this is not legal."
+  "I've determined this illegal"
+]
+
+getLegalRepsonse = () ->
+  return legal_resp[Math.floor(Math.random() * legal_resp.length)]
+
+getIllegalRepsonse = () ->
+  return illegal_resp[Math.floor(Math.random() * illegal_resp.length)]
+
+lyricsSearchCb = (msg, err, lyricsAndExplanations)->
+  if err
+    msg.send getLegalRepsonse()
+  }else{
+    #Printing lyrics with section names
+    msg.send getIllegalRepsonse()
+  }
+
 searchSong = (msg, val) ->
   rapgen.searchSong val, "rap", (err, songs) ->
     if err
-      msg.send "This may or may not be legal."
+      msg.send getLegalRepsonse()
     else
-      msg.send songs[0].name
-      msg.send "This is most definitely illegal."
+      msg.send songs[0].link
+      rapgen.searchLyricsAndExplanations(msg, songs[0].link, "rap", lyricsSearchCb);
 
 module.exports = (robot) ->
   robot.respond /hello/, (msg) ->
