@@ -1,4 +1,3 @@
 bin/
 .env
 external-scripts.json
-node_modules/hubot
