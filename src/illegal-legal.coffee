@@ -33,11 +33,18 @@ illegal_resp = [
   "I've determined this illegal"
 ]
 
+#
+# Returns a random integer between min (inclusive) and max (inclusive)
+# Using Math.round() will give you a non-uniform distribution!
+#
+getRandomInt = (min, max) ->
+    return Math.floor(Math.random() * (max - min + 1)) + min
+
 getLegalRepsonse = () ->
-  return legal_resp[Math.floor(Math.random() * legal_resp.length)]
+  return legal_resp[getRandomInt(0,legal_resp.length-1)]
 
 getIllegalRepsonse = () ->
-  return illegal_resp[Math.floor(Math.random() * illegal_resp.length)]
+  return illegal_resp[getRandomInt(0,illegal_resp.length-1)]
 
 
 searchSong = (msg, val) ->
