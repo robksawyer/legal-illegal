@@ -19,12 +19,11 @@
 rapgen = require("rapgenius-js");
 
 searchSong = (msg, val) ->
-  msg.send val
   rapgen.searchSong val, "rap", (err, songs) ->
-    msg.send err
     if err
       msg.send "This may or may not be legal."
     else
+      msg.send songs[0].name
       msg.send "This is most definitely illegal."
 
 module.exports = (robot) ->
