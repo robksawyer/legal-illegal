@@ -53,17 +53,12 @@ searchSong = (msg, val) ->
       return
     else
       msg.send getIllegalRepsonse()
+      return
   return
 
 
 
 module.exports = (robot) ->
-
-  robot.respond /legal/i, (msg) ->
-    msg.send getLegalRepsonse()
-
-  robot.respond /illegal/i, (msg) ->
-    msg.send getIllegalRepsonse()
 
   robot.respond /hello/, (msg) ->
     msg.reply "Hi! Don't believe anything that I say. None of this can be used against you in a court of law."
