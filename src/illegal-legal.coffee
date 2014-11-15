@@ -76,4 +76,4 @@ module.exports = (robot) ->
     msg.reply "Hi! Don't believe anything that I say. None of this can be used against you in a court of law."
 
   robot.hear /is it i{0,1}l+egal to (.*$)|is (.*) i{0,1}l+egal/im, (msg) ->
-    msg.send searchSong(msg, msg.match[1])
+    searchSong(msg, msg.match[1])
