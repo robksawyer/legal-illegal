@@ -39,11 +39,6 @@ getLegalRepsonse = () ->
 getIllegalRepsonse = () ->
   return illegal_resp[Math.floor(Math.random() * illegal_resp.length)]
 
-lyricsSearchCb = (msg, err, lyricsAndExplanations) ->
-  if err
-    msg.send getLegalRepsonse()
-  else 
-    msg.send getIllegalRepsonse()
 
 searchSong = (msg, val) ->
   rapgen.searchSong val, "rap", (err, songs) ->
@@ -51,7 +46,12 @@ searchSong = (msg, val) ->
       msg.send getLegalRepsonse()
     else
       msg.send songs[0].link
-      rapgen.searchLyricsAndExplanations(msg, songs[0].link, "rap", lyricsSearchCb);
+      rapgen.searchLyricsAndExplanations songs[0].link, "rap", (msg) ->
+        if err
+          msg.send getLegalRepsonse()
+        else 
+          msg.send getIllegalRepsonse()
+
 
 module.exports = (robot) ->
   robot.respond /hello/, (msg) ->
