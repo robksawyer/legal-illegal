@@ -46,36 +46,34 @@ getLegalRepsonse = () ->
 getIllegalRepsonse = () ->
   return illegal_resp[getRandomInt(0,illegal_resp.length-1)]
 
-
 searchSong = (msg, val) ->
   rapgen.searchSong val, "rap", (err, songs) ->
     if err
-      val = getLegalRepsonse()
-      msg.send val
+      msg.send getLegalRepsonse()
     else
-      msg.send songs[0].link
-      rapgen.searchLyricsAndExplanations songs[0].link, "rap", (msg, getLegalRepsonse, getIllegalRepsonse) ->
+      result = rapgen.searchLyricsAndExplanations songs[0].link, "rap", (msg) ->
         if err
-          val = getLegalRepsonse()
-          msg.send val
+          false
         else 
-          val = getIllegalRepsonse()
-          msg.send val
+          true
+
+      if result
+        msg.send getIllegalRepsonse()
+      else 
+        msg.send getLegalRepsonse()
+
 
 
 module.exports = (robot) ->
 
-  robot.respond /legal/, (msg) ->
-    val = getLegalRepsonse()
-    msg.send val
+  robot.respond /legal/i, (msg) ->
+    msg.send getLegalRepsonse()
 
-  robot.respond /illegal/, (msg) ->
-    val = getIllegalRepsonse()
-    msg.send val
+  robot.respond /illegal/i, (msg) ->
+    msg.send getIllegalRepsonse()
 
   robot.respond /hello/, (msg) ->
     msg.reply "Hi! Don't believe anything that I say. None of this can be used against you in a court of law."
 
   robot.hear /is it i{0,1}l+egal to (.*$)|is (.*) i{0,1}l+egal/im, (msg) ->
-    searchSong(msg, msg.match[1])
-    return
+    msg.send searchSong(msg, msg.match[1])
