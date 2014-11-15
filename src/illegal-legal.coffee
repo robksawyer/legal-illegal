@@ -53,10 +53,14 @@ searchSong = (msg, val) ->
     else
       result = rapgen.searchLyricsAndExplanations songs[0].link, "rap", (msg) ->
         if err
+          msg.send "Did not find result"
           false
         else 
+          msg.send "Found result"
           true
-
+      
+      msg.send result
+      
       if result
         msg.send getIllegalRepsonse()
       else 
