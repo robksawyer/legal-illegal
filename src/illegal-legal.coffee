@@ -39,13 +39,11 @@ getLegalRepsonse = () ->
 getIllegalRepsonse = () ->
   return illegal_resp[Math.floor(Math.random() * illegal_resp.length)]
 
-lyricsSearchCb = (msg, err, lyricsAndExplanations)->
+lyricsSearchCb = (msg, err, lyricsAndExplanations) ->
   if err
     msg.send getLegalRepsonse()
-  }else{
-    #Printing lyrics with section names
+  else 
     msg.send getIllegalRepsonse()
-  }
 
 searchSong = (msg, val) ->
   rapgen.searchSong val, "rap", (err, songs) ->
