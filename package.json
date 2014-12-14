@@ -1,7 +1,7 @@
 {
   "name": "hubot-illegal-legal",
   "description": "Punch in a word or phase and this brain will tell you whether or not it's legal or illegal.",
-  "version": "0.0.30",
+  "version": "0.0.31",
   "author": "robksawyer <robksawyer@gmail.com>",
   "license": "MIT",
   "keywords": [
@@ -14,10 +14,10 @@
   ],
   "repository": {
     "type": "git",
-    "url": "git://github.com/hubot-scripts/hubot-illegal-legal.git"
+    "url": "git://github.com/robksawyer/hubot-illegal-legal.git"
   },
   "bugs": {
-    "url": "https://github.com/hubot-scripts/hubot-illegal-legal/issues"
+    "url": "https://github.com/robksawyer/hubot-illegal-legal/issues"
   },
   "dependencies": {
     "coffee-script": "~1.6",
